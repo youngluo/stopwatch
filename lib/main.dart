@@ -27,7 +27,7 @@ class App extends StatelessWidget {
         elevation: 0,
       ),
       body: const Center(
-        child: Text('Hello, world!'),
+        child: TheTimer(),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
@@ -40,5 +40,47 @@ class App extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
+  }
+}
+
+class TheTimer extends StatefulWidget {
+  const TheTimer({super.key});
+
+  @override
+  State<TheTimer> createState() => _TimerState();
+}
+
+class _TimerState extends State<TheTimer> {
+  String getTime() {
+    return '23:20:20.3';
+  }
+
+  String currentTime = '';
+
+  _TimerState() {
+    this.currentTime = this.getTime();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // _timer = Timer.periodic(Duration(milliseconds: 1000), (timer) {
+    //   ///定时任务
+    // });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(alignment: Alignment.center, children: <Widget>[
+      SizedBox(
+          height: 220,
+          width: 220,
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.grey[200],
+            value: .7,
+          )),
+      Text('${currentTime}',
+          style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w500))
+    ]);
   }
 }
